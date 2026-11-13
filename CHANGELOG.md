@@ -10,7 +10,8 @@ Repackaged as a standard DSH bundle (zzl redistribution of upstream 1.0.0).
   Web 插件 page or `dsh plugin add`, lands in `dsh.profile.bundles`, and shows up
   in 已安装插件 with its own enable switch.
 - `icon.svg`: plugin-list icon.
-- `locale/zh.json`, `locale/en.json`: plugin-list title and description.
+- `locale/zh.json`, `locale/en.json`: plugin-list title and description, exposed as
+  `./locale/*.json` and `./icon` subpaths so the loader can read them.
 - `README.zh.md`, install notes and the double-mount warning.
 
 ### Changed

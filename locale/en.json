@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "PlantUML",
+    "description": "Render plantuml blocks as live diagrams entirely in the browser — no Java, no server, no network — with a diagram/source switch, fullscreen zoom and SVG/PNG export."
+  }
+}

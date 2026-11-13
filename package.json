@@ -1,0 +1,59 @@
+{
+  "name": "dsh-plantuml",
+  "version": "1.1.0",
+  "description": "Render PlantUML fenced blocks as live diagrams in the DeepSeek Harness chat, with a diagram/source switch, fullscreen zoom and SVG/PNG export. The official TeaVM engine runs in the browser: no Java, no server, no network.",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "plantuml",
+    "uml",
+    "diagram"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "icon": "./icon.svg",
+  "files": [
+    "lib",
+    "vendor",
+    "locale",
+    "docs",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "CHANGELOG.md",
+    "NOTICE.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "homepage": "https://gitea.xbugs.site/zzl/dsh-plantuml#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitea.xbugs.site/zzl/dsh-plantuml.git"
+  },
+  "bugs": {
+    "url": "https://gitea.xbugs.site/zzl/dsh-plantuml/issues"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    },
+    "manifestVersion": 1
+  }
+}

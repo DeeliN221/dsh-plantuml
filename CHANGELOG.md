@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.2.0 — 2026-11-18
+
+Content-addressed immutable engine caching, discovery manifest, transfer compression, and byte-range serving.
+
+### Added
+
+- Discovery manifest at `/dsh-plantuml/engine.json` (150 bytes; `Cache-Control: no-cache` + strong `ETag`, `304` on `If-None-Match`) returning `version`, `hash`, `url`, and `stdlibBase`.
+- Versioned immutable asset routes `/dsh-plantuml/<hash>/plantuml.js` and `/dsh-plantuml/<hash>/stdlib/*` with `Cache-Control: public, max-age=31536000, immutable`, where `<hash>` is the 16-hex-char SHA-256 prefix of `vendor/` contents.
+- `Accept-Encoding` negotiation supporting `br` (Brotli quality 6) and `gzip` (level 9) for text/script/JSON/SVG assets >= 256 bytes, emitting `Content-Encoding`, `Vary: Accept-Encoding`, and encoding-specific strong `ETag` values (`vendor/plantuml.js`: 4,013,244 B raw -> 1,106,930 B gzip / 999,823 B br).
+- `HEAD`, `If-None-Match` (`304`), and single-range `Range` (`206` + `Content-Range`, `416` when out of bounds) support. Transfer compression is disabled when `Range` is requested so byte slices always address the uncompressed asset.
+- `scripts/verify-assets.mjs` (Node stdlib only) and `npm run verify` to test manifest headers, immutable headers, `304`, `206`, `416`, `HEAD`, compression sizes, compatibility paths, and path guards.
+
+### Changed
+
+- `lib/client.js` now fetches `/dsh-plantuml/engine.json` (`cache: 'no-cache'`) before lazy-importing the fingerprinted `plantuml.js` and setting `PLANTUML_STDLIB_BASE` to the fingerprinted `stdlib/` prefix, falling back to `/dsh-plantuml/plantuml.js` only on `404`.
+- Legacy `/dsh-plantuml/plantuml.js` and `/dsh-plantuml/stdlib/*` paths remain available with `Cache-Control: no-cache`, strong `ETag`, compression, and `Range` support for backwards compatibility.
+
+### Unchanged
+
+- `vendor/` engine and standard library files, PlantUML rendering semantics, and runtime dependencies (zero new dependencies).
+
 ## 1.1.0 — 2026-11-13
 
 Repackaged as a standard DSH bundle (zzl redistribution of upstream 1.0.0).

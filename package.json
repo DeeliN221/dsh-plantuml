@@ -1,6 +1,6 @@
 {
   "name": "dsh-plantuml",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Render PlantUML fenced blocks as live diagrams in the DeepSeek Harness chat, with a diagram/source switch, fullscreen zoom and SVG/PNG export. The official TeaVM engine runs in the browser: no Java, no server, no network.",
   "keywords": [
     "dsh",
@@ -13,6 +13,9 @@
   "license": "MIT",
   "type": "module",
   "main": "lib/index.js",
+  "scripts": {
+    "verify": "node scripts/verify-assets.mjs"
+  },
   "exports": {
     ".": {
       "default": "./lib/index.js"

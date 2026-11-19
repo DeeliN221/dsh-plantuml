@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "PlantUML 图表",
+    "description": "把 plantuml 代码块渲染成图表：浏览器内 TeaVM 引擎，无需 Java 或服务端；每块可切换图片/源码，支持全屏缩放与 SVG/PNG 下载。"
+  }
+}

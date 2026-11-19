@@ -19,36 +19,36 @@ SVG/PNG 下载。渲染完全在浏览器内完成：没有 Java、没有 PlantU
 
 ## 安装
 
-本仓库是 DSH 插件包，`package.json` 内含 `dsh.bundle.patch`，装进去就是一个标准
-bundle：在「设置 → 插件 → 添加插件」里填本仓库地址，或命令行：
+本仓库是标准 DSH bundle（`package.json` 内含 `dsh.bundle.patch`）。
 
-```bash
-dsh plugin add git+https://github.com/DeeliN221/dsh-plantuml.git
+### 插件页安装（推荐）
+
+**设置 → 插件 → 添加插件**，填包规格：
+
+```
+github:DeeliN221/dsh-plantuml
 ```
 
-本地构建的包走手工登记，两处都要改：
+管理器会安装依赖并登记 bundle，之后在插件列表启用 **PlantUML 图表**。
+
+### 命令行
 
 ```bash
-cd packages/dsh && pnpm pack
-cp dsh-plantuml-1.3.0.tgz ~/.dsh/plugins/
+dsh plugin add github:DeeliN221/dsh-plantuml
 ```
 
-然后在 profile 的 `package.json` 里把 `dependencies.dsh-plantuml` 指向
-`file:/Users/you/.dsh/plugins/dsh-plantuml-1.3.0.tgz`，并把 `"dsh-plantuml"` 加入
-`dsh.profile.bundles`，执行：
+`dsh plugin add` 只加依赖，不会登记 bundle。还需要把 `"dsh-plantuml"` 加入
+profile `package.json` 的 `dsh.profile.bundles`，执行
+`dsh plugin --profile <name> install`，然后重启 DSH 进程。只刷新页面不够：
+Node 侧要注册 `/dsh-plantuml/core.js` 路由和带指纹的引擎资源。
+
+### npm
+
+暂未发布到 npm，当前公开渠道是上面的 GitHub 规格；发布后可直接：
 
 ```bash
-dsh plugin --profile web install
+dsh plugin add dsh-plantuml
 ```
-
-最后重启 DSH 进程并刷新页面。1.3.0 在 Node 侧新增了 `/dsh-plantuml/core.js`
-路由，只刷新页面不够。
-
-装好后「已安装插件」里会多出 **PlantUML 图表** 一行，可像其他插件一样开关。
-
-> 如果 profile 的 `cordis.patch.yml` 里还留着旧的手工挂载行
-> （`- id: dsh-plantuml` / `name: 'dsh-plantuml'`），改用 bundle 前必须删掉，
-> 否则同一路由会被挂载两次，插件树在启动时直接失败。
 
 ## 结构
 

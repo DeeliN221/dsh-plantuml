@@ -12,27 +12,38 @@ network round trip.
 
 ## Install
 
-This package is a standard DSH bundle (`dsh.bundle.patch` in `package.json`):
-install it from the Web **插件** page or the CLI, and the 插件 list shows a
-**PlantUML 图表** row with its own enable switch.
+This package is a standard DSH bundle (`dsh.bundle.patch` in `package.json`).
 
-```bash
-dsh plugin add git+https://github.com/DeeliN221/dsh-plantuml.git
+### From the Web plugin page (recommended)
+
+Open **设置 → 插件 → 添加插件** and enter the package spec:
+
+```
+github:DeeliN221/dsh-plantuml
 ```
 
-From a local checkout, pack the bundle and register both halves of the
-install (dependency and `dsh.profile.bundles`):
+The manager installs it and registers the bundle row; enable **PlantUML 图表**.
+
+### From the CLI
 
 ```bash
-pnpm pack
-cp dsh-plantuml-1.3.0.tgz ~/.dsh/plugins/
+dsh plugin add github:DeeliN221/dsh-plantuml
 ```
 
-Then point the profile's `dependencies.dsh-plantuml` at
-`file:/Users/you/.dsh/plugins/dsh-plantuml-1.3.0.tgz`, add `"dsh-plantuml"` to
-`dsh.profile.bundles`, run `dsh plugin --profile <name> install`, and restart
-the DSH process. A restart is required, not just a page reload: the node half
-serves a new `/dsh-plantuml/core.js` route.
+`dsh plugin add` only edits the dependency list. Also add `"dsh-plantuml"` to
+`dsh.profile.bundles` in the profile's `package.json`, run
+`dsh plugin --profile <name> install`, then restart the DSH process. A restart
+is required, not just a page reload: the node half serves
+`/dsh-plantuml/core.js` and the fingerprinted engine assets.
+
+### npm
+
+Not published to npm yet; the GitHub spec above is the public channel. Once
+published:
+
+```bash
+dsh plugin add dsh-plantuml
+```
 
 A profile that still mounts the plugin by hand — an `- id: dsh-plantuml` /
 `name: 'dsh-plantuml'` row in its own `cordis.patch.yml` — must remove that row

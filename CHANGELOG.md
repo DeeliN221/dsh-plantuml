@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.3.2 — 2026-11-22
+
+Release automation only: nothing in the rendering pipeline changed.
+
+### Changed
+
+- `.github/workflows/publish.yml` (tag-triggered `npm publish`, always failed
+  without an `NPM_TOKEN`) is replaced by `.github/workflows/release.yml`. A
+  `v<major>.<minor>.<patch>` tag now verifies that `package.json` matches the
+  tag, runs `npm run verify`, packs the tarball with `npm pack`, and attaches
+  `dsh-plantuml-1.3.2.tgz` plus `SHA256SUMS` to a GitHub Release.
+- The workflow only needs `contents: write`: no registry step, no `NPM_TOKEN`,
+  no `id-token` permission.
+
+### Unchanged
+
+- Runtime code, engine, standard library, HTTP routes, exports and the
+  `/dsh-plantuml/**` contract are the same as 1.3.1.
+
 ## 1.3.0 — 2026-11-19
 
 The rendering pipeline moved into the shared `plantuml-core` package; this

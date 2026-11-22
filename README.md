@@ -1,6 +1,6 @@
 # dsh-plantuml
 
-仓库：[DeeliN221/dsh-plantuml](https://github.com/DeeliN221/dsh-plantuml) · 安装：`dsh plugin --profile web add ./dsh-plantuml-1.3.1.tgz`（Release 产物）。
+仓库：[DeeliN221/dsh-plantuml](https://github.com/DeeliN221/dsh-plantuml) · 安装：`dsh plugin --profile web add ./dsh-plantuml-1.3.2.tgz`（Release 产物）。
 
 <img src="icon.svg" width="56" height="56" alt="PlantUML plugin icon" align="right" />
 
